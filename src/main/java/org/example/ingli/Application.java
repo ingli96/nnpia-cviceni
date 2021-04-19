@@ -1,23 +1,23 @@
 package org.example.ingli;
 
-public class Application {
+public class Application implements BlogApp {
 
     UserService userService;
     AiService aiService;
 
-    public Application() {
-        BlogService blogService = new BlogService();
-        userService = new UserService(blogService);
-        aiService = new AiService(blogService);
+    public Application(UserService userService, AiService aiService) {
+        this.userService = userService;
+        this.aiService = aiService;
 
     }
 
     public static void main(String[] args) {
-        Application application = new Application();
+        BlogApp application = DI.getBlogApp();
         application.process();
     }
 
-    private void process(){
+    @Override
+    public void process(){
         userService.newPost();
         aiService.newPost();
     }
