@@ -1,22 +1,29 @@
 package org.example.ingli;
 
-public class Application implements BlogApp {
+import org.example.ingli.services.AiService;
+import org.example.ingli.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
 
+@Component
+public class Application {
+
+    @Autowired
     UserService userService;
+
+    @Autowired
     AiService aiService;
 
-    public Application(UserService userService, AiService aiService) {
-        this.userService = userService;
-        this.aiService = aiService;
-
-    }
 
     public static void main(String[] args) {
-        BlogApp application = DI.getBlogApp();
-        application.process();
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("org.example.ingli");
+
+        context.getBean(Application.class).process();
     }
 
-    @Override
+
     public void process(){
         userService.newPost();
         aiService.newPost();

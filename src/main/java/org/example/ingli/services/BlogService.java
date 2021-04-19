@@ -1,5 +1,8 @@
-package org.example.ingli;
+package org.example.ingli.services;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class BlogService {
 
     public BlogService() {
